@@ -6,101 +6,117 @@
 <title>Alaz Oflaz Panel</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
   body, html {
     margin:0; padding:0; height:100%;
     font-family: 'Montserrat', sans-serif;
-    background:#f5f6fa;
-    color:#2f3640;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  body.dark {
-    background:#121212;
+    background:#000000; /* Siyah arka plan */
     color:#e1e1e1;
+    transition: background-color 0.3s,color 0.3s;
   }
   /* Giriş ekranı */
   #loginScreen {
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: #273c75;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    position: fixed; top:0; left:0; right:0; bottom:0;
+    background: #000;
+    color:white;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
     z-index: 9999;
   }
   #loginScreen h1 {
-    font-size: 36px;
+    font-size: 48px;
     margin-bottom: 40px;
     user-select:none;
+    color: #0ff;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    animation: neonGlow 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes neonGlow {
+    from {
+      text-shadow:
+        0 0 5px #0ff,
+        0 0 10px #0ff,
+        0 0 20px #0ff,
+        0 0 40px #0ff,
+        0 0 80px #0ff;
+      color: #0ff;
+    }
+    to {
+      text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 50px #00ffff,
+        0 0 100px #00ffff;
+      color: #aaffff;
+    }
   }
   #loginForm {
-    display: flex;
-    flex-direction: column;
-    width: 320px;
+    display: flex; flex-direction: column; width: 320px;
   }
   #loginForm input {
     margin-bottom: 20px;
-    padding: 12px 15px;
+    padding: 14px 18px;
     font-size: 18px;
     border-radius: 10px;
-    border: none;
+    border: 2px solid #0ff;
+    background: #111;
+    color: #0ff;
     outline: none;
+    transition: border-color 0.3s, background-color 0.3s;
   }
   #loginForm input::placeholder {
-    color: #666;
+    color: #55ffff;
+    font-weight: 600;
   }
-  #loginForm input#username {
-    font-weight: 700;
-    color: #273c75;
+  #loginForm input:focus {
+    border-color: #0ff;
+    background: #222;
   }
   #loginForm button {
     padding: 14px;
-    background: #ffdd59;
+    background: #0ff;
     border: none;
     border-radius: 10px;
     font-weight: 700;
     font-size: 18px;
     cursor: pointer;
+    color: #000;
     transition: background-color 0.3s;
   }
   #loginForm button:hover {
-    background: #f1c40f;
+    background: #33ffff;
   }
-  /* Ana sayfa */
+
+  /* Ana uygulama */
   #app {
     display: none;
     height: 100vh;
     max-width: 1200px;
     margin: 0 auto;
-    box-shadow: 0 0 15px rgb(0 0 0 / 0.1);
+    box-shadow: 0 0 20px #0ff;
     border-radius: 12px;
-    background: white;
+    background: #121212;
     overflow: hidden;
   }
-  body.dark #app {
-    background: #1e1e1e;
-    box-shadow: 0 0 20px rgb(255 255 255 / 0.05);
-  }
   header {
-    background: #273c75;
-    color: white;
+    background: #0ff;
+    color: #000;
     padding: 20px 30px;
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 900;
     user-select:none;
     text-align: center;
+    text-shadow: 0 0 10px #0ff;
   }
   .theme-toggle {
     position: fixed;
     top: 15px;
     right: 20px;
-    background: #273c75;
+    background: #0ff;
     border:none;
-    color: white;
+    color:#000;
     padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
@@ -110,7 +126,7 @@
     z-index: 1000;
   }
   .theme-toggle:hover {
-    background: #192a56;
+    background: #33ffff;
   }
   .main-wrapper {
     display: flex;
@@ -118,19 +134,24 @@
   }
   nav.sidebar {
     width: 260px;
-    background: #273c75;
+    background: #000;
     color: white;
     display: flex;
     flex-direction: column;
     user-select:none;
+    box-shadow: 2px 0 10px #0ff;
   }
   nav.sidebar h2 {
     margin: 20px;
     font-size: 20px;
     font-weight: 700;
-    border-bottom: 2px solid #192a56;
+    border-bottom: 2px solid #0ff;
     padding-bottom: 10px;
+    color: #0ff;
+    text-shadow: 0 0 8px #0ff;
   }
+
+  /* Buton renkleri farklı */
   nav.sidebar button {
     background: none;
     border: none;
@@ -139,13 +160,23 @@
     font-size: 16px;
     text-align: left;
     cursor: pointer;
-    border-left: 4px solid transparent;
+    border-left: 6px solid transparent;
     transition: background-color 0.3s, border-color 0.3s;
+    font-weight: 600;
   }
+  nav.sidebar button:nth-child(2) { color: #ff4757; }
+  nav.sidebar button:nth-child(3) { color: #ffa502; }
+  nav.sidebar button:nth-child(4) { color: #1e90ff; }
+  nav.sidebar button:nth-child(5) { color: #2ed573; }
+  nav.sidebar button:nth-child(6) { color: #e84393; }
+  nav.sidebar button:nth-child(7) { color: #f39c12; }
+  nav.sidebar button:nth-child(8) { color: #00cec9; }
+
   nav.sidebar button:hover,
   nav.sidebar button.active {
-    background-color: #192a56;
-    border-left-color: #ffdd59;
+    background-color: #111;
+    border-left-color: currentColor; /* aynı renkte kalacak */
+    text-shadow: 0 0 6px currentColor;
   }
   main.content {
     flex: 1;
@@ -155,6 +186,8 @@
   main.content h3 {
     margin-top: 0;
     font-weight: 700;
+    color: #0ff;
+    text-shadow: 0 0 8px #0ff;
   }
   label {
     display: block;
@@ -165,13 +198,15 @@
     width: 100%;
     padding: 10px 12px;
     font-size: 16px;
-    border: 2px solid #dcdde1;
+    border: 2px solid #0ff;
     border-radius: 8px;
     outline:none;
+    background: #111;
+    color: #0ff;
     transition: border-color 0.3s;
   }
   input[type=text]:focus, input[type=tel]:focus, input[type=number]:focus {
-    border-color: #273c75;
+    border-color: #33ffff;
   }
   button.submit-btn {
     margin-top: 25px;
@@ -179,8 +214,8 @@
     padding: 14px;
     font-size: 18px;
     font-weight: 700;
-    background-color: #273c75;
-    color: white;
+    background-color: #0ff;
+    color: #000;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -188,31 +223,28 @@
     user-select:none;
   }
   button.submit-btn:hover {
-    background-color: #192a56;
+    background-color: #33ffff;
   }
   .result-box {
     margin-top: 30px;
     padding: 20px;
-    background: #dcdde1;
+    background: #111;
     border-radius: 12px;
     font-size: 15px;
     line-height: 1.6;
     user-select:none;
     white-space: pre-wrap;
-  }
-  body.dark .result-box {
-    background: #333;
+    color: #0ff;
+    text-shadow: 0 0 6px #0ff;
   }
   .loading {
     margin-top: 30px;
     font-size: 18px;
     font-weight: 700;
-    color: #273c75;
+    color: #0ff;
     user-select:none;
   }
-  body.dark .loading {
-    color: #74b9ff;
-  }
+
   /* Responsive */
   @media (max-width: 900px) {
     .main-wrapper {
@@ -223,6 +255,10 @@
       width: 100%;
       flex-direction: row;
       overflow-x: auto;
+      box-shadow: none;
+    }
+    nav.sidebar h2 {
+      display: none;
     }
     nav.sidebar button {
       flex: 1 0 auto;
@@ -230,233 +266,398 @@
       border-bottom: 4px solid transparent;
       padding: 12px 8px;
       text-align: center;
+      font-weight: 700;
     }
     nav.sidebar button.active,
     nav.sidebar button:hover {
-      border-bottom-color: #ffdd59;
+      border-bottom-color: currentColor;
       background-color: transparent;
+      text-shadow: 0 0 8px currentColor;
     }
   }
 </style>
 </head>
 <body>
   <!-- Giriş Ekranı -->
-  <div id="loginScreen">
-    <h1>Alaz Oflaz Panel</h1>
+  <div id="loginScreen" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <h1 id="loginTitle">Alaz Oflaz Panel</h1>
     <form id="loginForm">
-      <input type="text" id="username" placeholder="Alaz Oflaz Panel" autocomplete="off" required />
-      <input type="password" id="password" placeholder="Şifre" autocomplete="off" required />
-      <button type="submit">Giriş Yap / Kayıt Ol</button>
+      <input type="text" id="username" placeholder="Alaz Oflaz Panel" autocomplete="off" required aria-label="Kullanıcı Adı" />
+      <input type="password" id="password" placeholder="Şifre" autocomplete="off" required aria-label="Şifre" />
+      <button type="submit" aria-label="Giriş Yap veya Kayıt Ol">Giriş Yap / Kayıt Ol</button>
     </form>
   </div>
 
   <!-- Ana Uygulama -->
   <div id="app" aria-live="polite">
     <header>Alaz Oflaz Panel</header>
-    <button class="theme-toggle" id="themeToggle">Karanlık Mod</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Tema Değiştir">Karanlık Mod</button>
     <div class="main-wrapper">
       <nav class="sidebar" aria-label="Kategori Menüsü">
         <h2>Kategoriler</h2>
-        <button class="active" data-cat="adsoyad">Ad Soyad / TC Kimlik</button>
-        <button data-cat="tc2numara">TC’den Numara</button>
-        <button data-cat="numara2tc">Numara’dan TC</button>
-        <button data-cat="adres">Adres Bilgisi</button>
-        <button data-cat="ip">IP Bilgisi</button>
-        <button data-cat="sosyal">Sosyal Medya Hesapları</button>
-        <button data-cat="ilac">İlaç Sorgu</button>
-        <button data-cat="plaka">Plaka Sorgu</button>
+        <button class="active" data-cat="adsoyad" style="color:#ff4757;">Ad Soyad / TC Kimlik</button>
+        <button data-cat="tc2numara" style="color:#ffa502;">TC’den Numara</button>
+        <button data-cat="numara2tc" style="color:#1e90ff;">Numara’dan TC</button>
+        <button data-cat="adres" style="color:#2ed573;">Adres Bilgisi</button>
+        <button data-cat="ip" style="color:#e84393;">IP Bilgisi</button>
+        <button data-cat="sosyal" style="color:#f39c12;">Sosyal Medya Hesapları</button>
+        <button data-cat="ilac" style="color:#00cec9;">İlaç Sorgu</button>
+        <button data-cat="plaka" style="color:#9c88ff;">Plaka Sorgu</button>
       </nav>
 
       <main class="content" role="main" tabindex="-1">
-        <!-- Dinamik içerik buraya gelecek -->
+        <!-- İçerik buraya -->
       </main>
     </div>
   </div>
 
 <script>
-  (() => {
-    const loginScreen = document.getElementById('loginScreen');
-    const loginForm = document.getElementById('loginForm');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const app = document.getElementById('app');
-    const themeToggle = document.getElementById('themeToggle');
-    const sidebarButtons = document.querySelectorAll('nav.sidebar button');
-    const content = document.querySelector('main.content');
+(() => {
+  const loginScreen = document.getElementById('loginScreen');
+  const loginForm = document.getElementById('loginForm');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const app = document.getElementById('app');
+  const themeToggle = document.getElementById('themeToggle');
+  const sidebarButtons = document.querySelectorAll('nav.sidebar button');
+  const content = document.querySelector('main.content');
 
-    let currentCat = 'adsoyad';
+  let currentCat = 'adsoyad';
 
-    // Tema durumu
-    function loadTheme() {
-      const theme = localStorage.getItem('theme');
-      if(theme === 'dark') {
-        document.body.classList.add('dark');
-        themeToggle.textContent = 'Açık Mod';
-      } else {
-        document.body.classList.remove('dark');
-        themeToggle.textContent = 'Karanlık Mod';
-      }
+  // Tema yönetimi
+  function loadTheme() {
+    const theme = localStorage.getItem('theme');
+    if(theme === 'dark') {
+      document.body.classList.add('dark');
+      themeToggle.textContent = 'Açık Mod';
+    } else {
+      document.body.classList.remove('dark');
+      themeToggle.textContent = 'Karanlık Mod';
     }
-    loadTheme();
+  }
+  loadTheme();
 
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      if(document.body.classList.contains('dark')){
-        localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = 'Açık Mod';
-      } else {
-        localStorage.setItem('theme', 'light');
-        themeToggle.textContent = 'Karanlık Mod';
-      }
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if(document.body.classList.contains('dark')){
+      localStorage.setItem('theme', 'dark');
+      themeToggle.textContent = 'Açık Mod';
+    } else {
+      localStorage.setItem('theme', 'light');
+      themeToggle.textContent = 'Karanlık Mod';
+    }
+  });
+
+  // Giriş formu submit
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if(usernameInput.value.trim() && passwordInput.value.trim()){
+      loginScreen.style.display = 'none';
+      app.style.display = 'block';
+      loadCategory(currentCat);
+      content.focus();
+    }
+  });
+
+  // Menü tıklamaları
+  sidebarButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sidebarButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.getAttribute('data-cat');
+      loadCategory(currentCat);
+      content.focus();
     });
+  });
 
-    // Giriş formu submit
-    loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      // Her ne yazarsa yazsın kabul
-      if(usernameInput.value.trim() && passwordInput.value.trim()){
-        loginScreen.style.display = 'none';
-        app.style.display = 'block';
-        // Ana sayfa içeriğini yükle
-        loadCategory(currentCat);
-      }
-    });
+  // Fake veri üreticiler
+  function randomFrom(arr){return arr[Math.floor(Math.random()*arr.length)];}
+  function randomInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+  function generateFakeTC(){let tc = ''; tc += randomInt(1,9).toString(); for(let i=0;i<10;i++){tc += randomInt(0,9).toString();} return tc;}
+  function generateFakePhone(){const codes = ['530','531','532','533','534','535','536','537','538','539']; return '+90 ' + randomFrom(codes) + ' ' + randomInt(100,999) + ' ' + randomInt(10,99) + ' ' + randomInt(10,99);}
+  function generateFakeName(){const firstNames = ['Ahmet','Mehmet','Ayşe','Fatma','Ali','Emre','Deniz','Zeynep','Burak','Elif']; const lastNames = ['Yılmaz','Demir','Şahin','Çelik','Kaya','Öztürk','Arslan','Doğan','Koç','Polat']; return randomFrom(firstNames) + ' ' + randomFrom(lastNames);}
+  function generateFakeAddress(){const cities = ['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Trabzon','Kayseri','Samsun']; const districts = ['Merkez','Çankaya','Kadıköy','Bornova','Osmangazi','Muratpaşa','Seyhan','Selçuklu','Ortahisar','Atakum']; return randomFrom(districts) + ', ' + randomFrom(cities) + ' / Türkiye';}
+  function generateFakeJob(){const jobs = ['Mühendis','Doktor','Öğretmen','Avukat','Polis','İşçi','Satıcı','Memur','Pilot','Yazılımcı']; return randomFrom(jobs);}
+  function generateFakeParentName(){const names = ['Ayşe','Fatma','Emine','Hatice','Zeynep','Mehmet','Ahmet','Ali','Hüseyin','Mustafa']; return randomFrom(names) + ' ' + randomFrom(['Yılmaz','Demir','Şahin','Çelik']);}
+  function generateFakeEmail(name){const domains = ['gmail.com','hotmail.com','yahoo.com','outlook.com']; let cleanName = name.toLowerCase().replace(/\s+/g,''); return cleanName + randomInt(1,99) + '@' + randomFrom(domains);}
+  function generateFakeSocialMedia(name){const platforms = ['instagram','tiktok','whatsapp','facebook','twitter']; let cleanName = name.toLowerCase().replace(/\s+/g,''); let res = {}; platforms.forEach(p=>{ res[p] = `https://www.${p}.com/${cleanName}${randomInt(10,99)}`; }); return res;}
+  function generateFakeBloodGroup(){const groups = ['A+','A-','B+','B-','AB+','AB-','0+','0-']; return randomFrom(groups);}
+  function generateFakeEducation(){const levels = ['İlköğretim','Lise','Üniversite','Yüksek Lisans','Doktora']; return randomFrom(levels);}
+  function generateFakeMaritalStatus(){const statuses = ['Bekar','Evli','Boşanmış','Dul']; return randomFrom(statuses);}
+  function generateFakeIP(){return `${randomInt(1,255)}.${randomInt(0,255)}.${randomInt(0,255)}.${randomInt(0,255)}`;}
+  function generateFakePlate(){const provinces = ['01','06','34','35','07','16','42','26','44','55']; const letters = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'; let plate = randomFrom(provinces) + ' '; for(let i=0; i<3; i++){ plate += letters.charAt(randomInt(0, letters.length-1)); } plate += ' ' + randomInt(10,99); return plate;}
+  function generateFakeDrug(){const drugs = ['Parol','Aspirin','Dolorex','Neurofen','Majezik','Panadol','Algopyrin','Dafalgan','Voltaren','Diclac']; return randomFrom(drugs);}
 
-    // Menü tıklamaları
-    sidebarButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        sidebarButtons.forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        currentCat = btn.getAttribute('data-cat');
-        loadCategory(currentCat);
-      });
-    });
+  function showLoading(){
+    content.innerHTML = '<div class="loading">Sorgulanıyor...</div>';
+  }
+  function hideLoading(){
+    // Boş bırakıyorum, çünkü üzerine yazıyoruz
+  }
 
-    // Sahte veri üretici fonksiyonları
-    function randomFrom(arr){
-      return arr[Math.floor(Math.random()*arr.length)];
-    }
-    function randomInt(min,max){
-      return Math.floor(Math.random()*(max-min+1)) + min;
-    }
-    function generateFakeTC(){
-      let tc = '';
-      tc += randomInt(1,9).toString();
-      for(let i=0;i<9;i++){
-        tc += randomInt(0,9).toString();
-      }
-      return tc;
-    }
-    function generateFakePhone(){
-      const codes = ['530','531','532','533','534','535','536','537','538','539'];
-      return '+90 ' + randomFrom(codes) + ' ' + randomInt(100,999) + ' ' + randomInt(10,99) + ' ' + randomInt(10,99);
-    }
-    function generateFakeName(){
-      const firstNames = ['Ahmet','Mehmet','Ayşe','Fatma','Ali','Emre','Deniz','Zeynep','Burak','Elif'];
-      const lastNames = ['Yılmaz','Demir','Şahin','Çelik','Kaya','Öztürk','Arslan','Doğan','Koç','Polat'];
-      return randomFrom(firstNames) + ' ' + randomFrom(lastNames);
-    }
-    function generateFakeAddress(){
-      const cities = ['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Trabzon','Kayseri','Samsun'];
-      const districts = ['Merkez','Çankaya','Kadıköy','Bornova','Osmangazi','Muratpaşa','Seyhan','Selçuklu','Ortahisar','Atakum'];
-      return randomFrom(districts) + ', ' + randomFrom(cities) + ' / Türkiye';
-    }
-    function generateFakeJob(){
-      const jobs = ['Mühendis','Doktor','Öğretmen','Avukat','Polis','İşçi','Satıcı','Memur','Pilot','Yazılımcı'];
-      return randomFrom(jobs);
-    }
-    function generateFakeParentName(){
-      const names = ['Ayşe','Fatma','Emine','Hatice','Zeynep','Mehmet','Ahmet','Ali','Hüseyin','Mustafa'];
-      return randomFrom(names) + ' ' + randomFrom(['Yılmaz','Demir','Şahin','Çelik']);
-    }
-    function generateFakeEmail(name){
-      const domains = ['gmail.com','hotmail.com','yahoo.com','outlook.com'];
-      let cleanName = name.toLowerCase().replace(/\s+/g,'');
-      return cleanName + randomInt(1,99) + '@' + randomFrom(domains);
-    }
-    function generateFakeSocialMedia(name){
-      const platforms = ['instagram','tiktok','whatsapp','facebook','twitter'];
-      let cleanName = name.toLowerCase().replace(/\s+/g,'');
-      let res = {};
-      platforms.forEach(p=>{
-        res[p] = `https://www.${p}.com/${cleanName}${randomInt(10,99)}`;
-      });
-      return res;
-    }
-    function generateFakeBloodGroup(){
-      const groups = ['A+','A-','B+','B-','AB+','AB-','0+','0-'];
-      return randomFrom(groups);
-    }
-    function generateFakeEducation(){
-      const levels = ['İlköğretim','Lise','Üniversite','Yüksek Lisans','Doktora'];
-      return randomFrom(levels);
-    }
-    function generateFakeMaritalStatus(){
-      const statuses = ['Bekar','Evli','Boşanmış','Dul'];
-      return randomFrom(statuses);
-    }
-    function generateFakeIP(){
-      return `${randomInt(1,255)}.${randomInt(0,255)}.${randomInt(0,255)}.${randomInt(0,255)}`;
-    }
-    function generateFakePlate(){
-      const provinces = ['01','06','34','35','07','16','42','26','44','55'];
-      const letters = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ';
-      let plate = randomFrom(provinces) + ' ';
-      for(let i=0; i<3; i++){
-        plate += letters.charAt(randomInt(0, letters.length-1));
-      }
-      plate += ' ' + randomInt(10,99);
-      return plate;
-    }
-    function generateFakeDrug(){
-      const drugs = ['Parol','Aspirin','Dolorex','Neurofen','Majezik','Panadol','Algopyrin','Dafalgan','Voltaren','Diclac'];
-      return randomFrom(drugs);
-    }
+  function loadCategory(cat){
+    content.innerHTML = '';
+    switch(cat){
+      case 'adsoyad':
+        content.innerHTML = `
+          <h3>Ad Soyad / TC Kimlik Sorgu</h3>
+          <label for="inputAdSoyad">Ad Soyad veya TC Kimlik No Giriniz:</label>
+          <input type="text" id="inputAdSoyad" placeholder="Ahmet Yılmaz veya 12345678901" autocomplete="off" />
+          <button class="submit-btn" id="btnAdSoyad">Sorgula</button>
+          <div id="resultAdSoyad" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnAdSoyad').onclick = () => {
+          const val = document.getElementById('inputAdSoyad').value.trim();
+          if(!val){
+            alert('Lütfen bir değer girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const name = /^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(val) ? val : generateFakeName();
+            const tc = /^[0-9]{11}$/.test(val) ? val : generateFakeTC();
+            const baba = generateFakeParentName();
+            const anne = generateFakeParentName();
+            const yas = randomInt(18,65);
+            const dogum = `${randomInt(1,28)}.${randomInt(1,12)}.${2025-yas}`;
+            const adres = generateFakeAddress();
+            const tel = generateFakePhone();
+            const email = generateFakeEmail(name);
+            const meslek = generateFakeJob();
+            const medeni = generateFakeMaritalStatus();
+            const kan = generateFakeBloodGroup();
+            const egitim = generateFakeEducation();
+            const sosyal = generateFakeSocialMedia(name);
 
-    // Kategoriye göre form ve sonuç
-    function loadCategory(cat){
-      content.innerHTML = '';
-      switch(cat){
-        case 'adsoyad':
-          content.innerHTML = `
-            <h3>Ad Soyad / TC Kimlik Sorgu</h3>
-            <label for="inputAdSoyad">Ad Soyad veya TC Kimlik No Giriniz:</label>
-            <input type="text" id="inputAdSoyad" placeholder="Ahmet Yılmaz veya 12345678901" autocomplete="off" />
-            <button class="submit-btn" id="btnAdSoyad">Sorgula</button>
-            <div id="resultAdSoyad" class="result-box" style="display:none;"></div>
-          `;
-          document.getElementById('btnAdSoyad').onclick = () => {
-            const val = document.getElementById('inputAdSoyad').value.trim();
-            if(!val){
-              alert('Lütfen bir değer girin.');
-              return;
-            }
-            showLoading();
-            setTimeout(()=>{
-              hideLoading();
-              const name = /^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(val) ? val : generateFakeName();
-              const tc = /^[0-9]{11}$/.test(val) ? val : generateFakeTC();
-              const baba = generateFakeParentName();
-              const anne = generateFakeParentName();
-              const yas = randomInt(18,65);
-              const dogum = `${randomInt(1,28)}.${randomInt(1,12)}.${2025-yas}`;
-              const adres = generateFakeAddress();
-              const tel = generateFakePhone();
-              const email = generateFakeEmail(name);
-              const meslek = generateFakeJob();
-              const medeni = generateFakeMaritalStatus();
-              const kan = generateFakeBloodGroup();
-              const egitim = generateFakeEducation();
-              const sosyal = generateFakeSocialMedia(name);
-
-              const res = 
-`Ad Soyad   : ${name}
-TC Kimlik  : ${tc}
-Anne       : ${anne}
-Baba       : ${baba}
+            const res = 
+`Ad Soyad    : ${name}
+TC Kimlik   : ${tc}
+Anne        : ${anne}
+Baba        : ${baba}
 Doğum Tarihi: ${dogum} (Yaş: ${yas})
-Adres      : ${adres}
-Telefon    : ${tel}
-E-posta    : ${email}
-Meslek     : ${meslek}
-Medeni Dur
+Adres       : ${adres}
+Telefon     : ${tel}
+E-posta     : ${email}
+Meslek      : ${meslek}
+Medeni Durum: ${medeni}
+Kan Grubu   : ${kan}
+Eğitim      : ${egitim}
+
+Sosyal Hesaplar:
+Instagram : ${sosyal.instagram}
+TikTok    : ${sosyal.tiktok}
+WhatsApp  : ${sosyal.whatsapp}
+Facebook  : ${sosyal.facebook}
+Twitter   : ${sosyal.twitter}
+`;
+            const resultBox = document.getElementById('resultAdSoyad');
+            resultBox.style.display = 'block';
+            resultBox.textContent = res;
+          }, 1200);
+        }
+        break;
+
+      case 'tc2numara':
+        content.innerHTML = `
+          <h3>TC Kimlik'ten Telefon Numarası Bulma</h3>
+          <label for="inputTCtoNumara">TC Kimlik No Giriniz:</label>
+          <input type="text" id="inputTCtoNumara" placeholder="12345678901" maxlength="11" autocomplete="off" />
+          <button class="submit-btn" id="btnTCtoNumara">Sorgula</button>
+          <div id="resultTCtoNumara" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnTCtoNumara').onclick = () => {
+          const val = document.getElementById('inputTCtoNumara').value.trim();
+          if(!/^\d{11}$/.test(val)){
+            alert('Geçerli 11 haneli TC Kimlik numarası girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const phone = generateFakePhone();
+            const resultBox = document.getElementById('resultTCtoNumara');
+            resultBox.style.display = 'block';
+            resultBox.textContent = `TC Kimlik: ${val}\nTelefon Numarası: ${phone}`;
+          }, 1000);
+        }
+        break;
+
+      case 'numara2tc':
+        content.innerHTML = `
+          <h3>Telefon Numarasından TC Kimlik Bulma</h3>
+          <label for="inputNumaratoTC">Telefon Numarası Giriniz:</label>
+          <input type="text" id="inputNumaratoTC" placeholder="+90 5xx xxx xx xx veya 5xxxxxxxxx" autocomplete="off" />
+          <button class="submit-btn" id="btnNumaratoTC">Sorgula</button>
+          <div id="resultNumaratoTC" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnNumaratoTC').onclick = () => {
+          const val = document.getElementById('inputNumaratoTC').value.trim();
+          if(!/^(\+90\s?)?5\d{2}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/.test(val) && !/^5\d{9}$/.test(val)){
+            alert('Geçerli bir telefon numarası girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const tc = generateFakeTC();
+            const resultBox = document.getElementById('resultNumaratoTC');
+            resultBox.style.display = 'block';
+            resultBox.textContent = `Telefon Numarası: ${val}\nTC Kimlik No: ${tc}`;
+          }, 1000);
+        }
+        break;
+
+      case 'adres':
+        content.innerHTML = `
+          <h3>Adres Bilgisi Sorgu</h3>
+          <label for="inputAdres">İsim, TC veya Telefon Giriniz:</label>
+          <input type="text" id="inputAdres" placeholder="Ahmet Yılmaz veya 12345678901" autocomplete="off" />
+          <button class="submit-btn" id="btnAdres">Sorgula</button>
+          <div id="resultAdres" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnAdres').onclick = () => {
+          const val = document.getElementById('inputAdres').value.trim();
+          if(!val){
+            alert('Lütfen bir değer girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const adres = generateFakeAddress();
+            const resultBox = document.getElementById('resultAdres');
+            resultBox.style.display = 'block';
+            resultBox.textContent = `Girdiğiniz: ${val}\nAdres: ${adres}`;
+          }, 1000);
+        }
+        break;
+
+      case 'ip':
+        content.innerHTML = `
+          <h3>IP Bilgisi Sorgu</h3>
+          <label for="inputIP">IP Adresi Giriniz:</label>
+          <input type="text" id="inputIP" placeholder="192.168.1.1" autocomplete="off" />
+          <button class="submit-btn" id="btnIP">Sorgula</button>
+          <div id="resultIP" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnIP').onclick = () => {
+          const val = document.getElementById('inputIP').value.trim();
+          if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(val)){
+            alert('Geçerli bir IP adresi girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const city = randomFrom(['İstanbul','Ankara','İzmir','Bursa','Antalya']);
+            const country = 'Türkiye';
+            const isp = randomFrom(['Turkcell','Vodafone','Türk Telekom','Superonline']);
+            const resultBox = document.getElementById('resultIP');
+            resultBox.style.display = 'block';
+            resultBox.textContent = `IP Adresi: ${val}\nŞehir: ${city}\nÜlke: ${country}\nISS: ${isp}`;
+          }, 1000);
+        }
+        break;
+
+      case 'sosyal':
+        content.innerHTML = `
+          <h3>Sosyal Medya Hesapları Sorgu</h3>
+          <label for="inputSosyal">İsim veya Kullanıcı Adı Giriniz:</label>
+          <input type="text" id="inputSosyal" placeholder="ahmetyilmaz" autocomplete="off" />
+          <button class="submit-btn" id="btnSosyal">Sorgula</button>
+          <div id="resultSosyal" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnSosyal').onclick = () => {
+          const val = document.getElementById('inputSosyal').value.trim();
+          if(!val){
+            alert('Lütfen bir kullanıcı adı girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const sosyal = generateFakeSocialMedia(val);
+            const resultBox = document.getElementById('resultSosyal');
+            resultBox.style.display = 'block';
+            resultBox.textContent = 
+`Instagram : ${sosyal.instagram}
+TikTok    : ${sosyal.tiktok}
+WhatsApp  : ${sosyal.whatsapp}
+Facebook  : ${sosyal.facebook}
+Twitter   : ${sosyal.twitter}`;
+          }, 1000);
+        }
+        break;
+
+      case 'ilac':
+        content.innerHTML = `
+          <h3>İlaç Sorgu</h3>
+          <label for="inputIlac">İlaç Adı Giriniz:</label>
+          <input type="text" id="inputIlac" placeholder="Parol" autocomplete="off" />
+          <button class="submit-btn" id="btnIlac">Sorgula</button>
+          <div id="resultIlac" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnIlac').onclick = () => {
+          const val = document.getElementById('inputIlac').value.trim();
+          if(!val){
+            alert('Lütfen bir ilaç adı girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const ilac = generateFakeDrug();
+            const info = `${val} hakkında sahte bilgi: Etken madde: ${ilac} içermektedir. Kullanım dozu günde 2 kez önerilir. Yan etkiler nadirdir.`;
+            const resultBox = document.getElementById('resultIlac');
+            resultBox.style.display = 'block';
+            resultBox.textContent = info;
+          }, 1000);
+        }
+        break;
+
+      case 'plaka':
+        content.innerHTML = `
+          <h3>Plaka Sorgu</h3>
+          <label for="inputPlaka">Plaka Kodu Giriniz (örn: 06):</label>
+          <input type="text" id="inputPlaka" placeholder="06" maxlength="2" autocomplete="off" />
+          <button class="submit-btn" id="btnPlaka">Sorgula</button>
+          <div id="resultPlaka" class="result-box" style="display:none;"></div>
+        `;
+        document.getElementById('btnPlaka').onclick = () => {
+          const val = document.getElementById('inputPlaka').value.trim();
+          if(!/^\d{1,2}$/.test(val)){
+            alert('Geçerli bir plaka kodu girin.');
+            return;
+          }
+          showLoading();
+          setTimeout(()=>{
+            hideLoading();
+            const provinces = {
+              '01':'Adana',
+              '06':'Ankara',
+              '34':'İstanbul',
+              '35':'İzmir',
+              '07':'Antalya',
+              '16':'Bursa',
+              '42':'Konya',
+              '26':'Eskişehir',
+              '44':'Malatya',
+              '55':'Samsun'
+            };
+            const city = provinces[val] || 'Bilinmeyen İl';
+            const resultBox = document.getElementById('resultPlaka');
+            resultBox.style.display = 'block';
+            resultBox.textContent = `Plaka Kodu: ${val}\nİl: ${city}`;
+          }, 1000);
+        }
+        break;
+
+      default:
+        content.innerHTML = '<p>Seçim yapılamadı.</p>';
+    }
+  }
+})();
+</script>
+</body>
+</html>
